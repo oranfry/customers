@@ -20,6 +20,11 @@ class customer extends \Linetype
                 'fuse' => '{t}.name',
             ],
             (object) [
+                'name' => 'email',
+                'type' => 'text',
+                'fuse' => '{t}.email',
+            ],
+            (object) [
                 'name' => 'address',
                 'type' => 'multiline',
                 'fuse' => '{t}.address',
@@ -29,13 +34,20 @@ class customer extends \Linetype
                 'type' => 'text',
                 'fuse' => '{t}.maincontact',
             ],
+            (object) [
+                'name' => 'nickname',
+                'type' => 'text',
+                'fuse' => '{t}.nickname',
+            ],
         ];
 
         $this->unfuse_fields = [
             '{t}.clientid' => ':{t}_clientid',
             '{t}.name' => ':{t}_name',
+            '{t}.email' => ':{t}_email',
             '{t}.address' => ':{t}_address',
             '{t}.maincontact' => ':{t}_maincontact',
+            '{t}.nickname' => ':{t}_nickname',
         ];
     }
 
