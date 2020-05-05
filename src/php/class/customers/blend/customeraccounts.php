@@ -9,8 +9,8 @@ class customeraccounts extends \Blend
         ksort($clientids);
 
         $this->label = 'Accounts';
-        $this->linetypes = ['customerinvoice', 'transaction',];
-        $this->showass = ['list', 'graph',];
+        $this->linetypes = ['ncustomerinvoice', 'transaction'];
+        $this->showass = ['list', 'graph'];
         $this->groupby = 'date';
         $this->past = true;
         $this->cum = true;
@@ -54,6 +54,13 @@ class customeraccounts extends \Blend
                 'name' => 'broken',
                 'type' => 'class',
                 'default' => '',
+            ],
+        ];
+        $this->filters = [
+            (object) [
+                'field' => 'clientid',
+                'cmp' => '=',
+                'value' => $clientids,
             ],
         ];
     }
