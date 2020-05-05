@@ -47,7 +47,7 @@ class customerinvoice extends \Linetype
                 'name' => 'file',
                 'type' => 'file',
                 'icon' => 'docpdf',
-                'path' => 'invoice',
+                'path' => 'customerinvoice',
                 'supress_header' => true,
                 'generable' => true,
             ],
