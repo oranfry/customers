@@ -109,10 +109,6 @@ class customerinvoice extends \Linetype
             $errors[] = 'no clientid';
         }
 
-        if (@$line->amount && $line->amount != $this->calculate_total($line)) {
-            $errors[] = 'total is different that the sum of the lines';
-        }
-
         return $errors;
     }
 
