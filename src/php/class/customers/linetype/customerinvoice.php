@@ -32,6 +32,16 @@ class customerinvoice extends \Linetype
                 'fuse' => '{t}.clientid',
             ],
             (object) [
+                'name' => 'name',
+                'type' => 'text',
+                'fuse' => '{t}.name',
+            ],
+            (object) [
+                'name' => 'address',
+                'type' => 'multiline',
+                'fuse' => '{t}.address',
+            ],
+            (object) [
                 'name' => 'description',
                 'type' => 'text',
                 'fuse' => '{t}.description',
@@ -54,7 +64,7 @@ class customerinvoice extends \Linetype
             (object) [
                 'name' => 'broken',
                 'type' => 'text',
-                'fuse' => "if({t}.clientid is null or {t}.clientid = '', 'broken', '')",
+                'fuse' => "if({t}.user is null or {t}.user = '', 'broken', '')",
                 'derived' => true,
                 'calc' => function($line) {
                     if (@$line->broken) {
@@ -74,6 +84,8 @@ class customerinvoice extends \Linetype
             '{t}.date' => ':{t}_date',
             '{t}.number' => ':{t}_number',
             '{t}.clientid' => ':{t}_clientid',
+            '{t}.name' => ':{t}_name',
+            '{t}.address' => ':{t}_address',
             '{t}.amount' => ':{t}_amount',
             '{t}.description' => ':{t}_description',
         ];
@@ -87,16 +99,6 @@ class customerinvoice extends \Linetype
         ];
     }
 
-    public function get_suggested_values()
-    {
-        $clientids = get_values('customer', 'clientid', null, "concat(`clientid`, ' - ', `name`)");
-        ksort($clientids);
-
-        return [
-            'clientid' => $clientids,
-        ];
-    }
-
     public function validate($line)
     {
         $errors = [];
@@ -105,8 +107,12 @@ class customerinvoice extends \Linetype
             $errors[] = 'no date';
         }
 
-        if ($line->clientid == null) {
-            $errors[] = 'no clientid';
+        if ($line->name == null) {
+            $errors[] = 'no name';
+        }
+
+        if ($line->address == null) {
+            $errors[] = 'no address';
         }
 
         return $errors;
