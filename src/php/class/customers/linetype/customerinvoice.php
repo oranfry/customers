@@ -22,11 +22,6 @@ class customerinvoice extends \Linetype
                 'fuse' => '{t}.date',
             ],
             (object) [
-                'name' => 'number',
-                'type' => 'text',
-                'fuse' => '{t}.number',
-            ],
-            (object) [
                 'name' => 'clientid',
                 'type' => 'text',
                 'fuse' => '{t}.clientid',
@@ -82,7 +77,6 @@ class customerinvoice extends \Linetype
         ];
         $this->unfuse_fields = [
             '{t}.date' => ':{t}_date',
-            '{t}.number' => ':{t}_number',
             '{t}.clientid' => ':{t}_clientid',
             '{t}.name' => ':{t}_name',
             '{t}.address' => ':{t}_address',
@@ -123,15 +117,6 @@ class customerinvoice extends \Linetype
         if (!@$line->amount) {
             $line->amount = $this->calculate_total($line);
         }
-
-        if (!@$line->number) {
-            $line->number = static::newid();
-        }
-    }
-
-    private function newid()
-    {
-        return str_pad(dechex(mt_rand(0, 0xFFFFFF)), 6, '0', STR_PAD_LEFT);
     }
 
     private function calculate_total($line)
