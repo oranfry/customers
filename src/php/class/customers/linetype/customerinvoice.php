@@ -74,7 +74,7 @@ class customerinvoice extends \Linetype
                     $fy = date('Y') + (date('m') > 3 ? 1 : 0);
                     $afterdate = ($fy - 8) . '-04-01';
 
-                    if (strcmp($line->date, $afterdate) >= 0 && !@$line->file) {
+                    if (strcmp($line->date, $afterdate) >= 0 && !@$line->file_path) {
                         return 'broken';
                     }
                 },
