@@ -10,6 +10,7 @@ class customeraccounts extends \Blend
 
         $this->label = 'Accounts';
         $this->linetypes = ['ncustomerinvoice', 'transaction'];
+        $this->hide_types = ['ncustomerinvoice' => 'customerinvoice'];
         $this->showass = ['list', 'graph'];
         $this->groupby = 'date';
         $this->past = true;
