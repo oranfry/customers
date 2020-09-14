@@ -5,7 +5,7 @@ class customeraccounts extends \Blend
 {
     public function __construct()
     {
-        $customer_users = get_values('user', 'user', '`clientid` is not null', "concat(`clientid`, ' - ', `name`)");
+        $customer_users = get_values('user', 'user', null, 'name');
         ksort($customer_users);
 
         $this->label = 'Accounts';
