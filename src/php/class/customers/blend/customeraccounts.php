@@ -61,7 +61,7 @@ class customeraccounts extends \Blend
             (object) [
                 'field' => 'user',
                 'cmp' => '=',
-                'value' => $customer_users,
+                'value' => array_values($customer_users),
             ],
         ];
     }
