@@ -42,10 +42,6 @@ class customerinvoiceline extends \Linetype
             $errors[] = 'no description';
         }
 
-        if ($line->amount == null) {
-            $errors[] = 'no amount';
-        }
-
         return $errors;
     }
 }
