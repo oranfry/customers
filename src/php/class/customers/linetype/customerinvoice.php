@@ -22,9 +22,9 @@ class customerinvoice extends \Linetype
                 'fuse' => '{t}.date',
             ],
             (object) [
-                'name' => 'clientid',
+                'name' => 'email',
                 'type' => 'text',
-                'fuse' => '{t}.clientid',
+                'fuse' => '{t}.email',
             ],
             (object) [
                 'name' => 'name',
@@ -77,8 +77,8 @@ class customerinvoice extends \Linetype
         ];
         $this->unfuse_fields = [
             '{t}.date' => ':{t}_date',
-            '{t}.clientid' => ':{t}_clientid',
             '{t}.name' => ':{t}_name',
+            '{t}.email' => ':{t}_email',
             '{t}.address' => ':{t}_address',
             '{t}.amount' => ':{t}_amount',
             '{t}.description' => ':{t}_description',
