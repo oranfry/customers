@@ -5,9 +5,6 @@ class customerinvoices extends \Blend
 {
     public function __construct()
     {
-        $customer_users = get_values('user', 'user', '`clientid` is not null', "concat(`clientid`, ' - ', `name`)");
-        ksort($customer_users);
-
         $this->label = 'Invoices';
         $this->linetypes = ['customerinvoice'];
         $this->showass = ['list', 'graph',];
@@ -30,7 +27,11 @@ class customerinvoices extends \Blend
                 'name' => 'user',
                 'type' => 'text',
                 'main' => true,
-                'filteroptions' => $customer_users,
+                'filteroptions' => function ($token) {
+                    $customer_users = get_values($token, 'user', 'user', null, 'name');
+                    ksort($customer_users);
+                    return $customer_users;
+                },
             ],
             (object) [
                 'name' => 'description',

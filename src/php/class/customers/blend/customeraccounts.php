@@ -5,9 +5,6 @@ class customeraccounts extends \Blend
 {
     public function __construct()
     {
-        $customer_users = get_values('user', 'user', null, 'name');
-        ksort($customer_users);
-
         $this->label = 'Accounts';
         $this->linetypes = ['ncustomerinvoice', 'transaction'];
         $this->hide_types = ['ncustomerinvoice' => 'customerinvoice'];
@@ -31,7 +28,11 @@ class customeraccounts extends \Blend
                 'name' => 'user',
                 'type' => 'text',
                 'main' => true,
-                'filteroptions' => $customer_users,
+                'filteroptions' => function ($token) {
+                    $customer_users = get_values($token, 'user', 'user', null, 'name');
+                    ksort($customer_users);
+                    return $customer_users;
+                },
             ],
             (object) [
                 'name' => 'description',
@@ -55,13 +56,6 @@ class customeraccounts extends \Blend
                 'name' => 'broken',
                 'type' => 'class',
                 'default' => '',
-            ],
-        ];
-        $this->filters = [
-            (object) [
-                'field' => 'user',
-                'cmp' => '=',
-                'value' => array_values($customer_users),
             ],
         ];
     }
