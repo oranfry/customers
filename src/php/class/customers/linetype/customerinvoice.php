@@ -76,12 +76,30 @@ class customerinvoice extends \Linetype
             ],
         ];
         $this->unfuse_fields = [
-            '{t}.date' => ':{t}_date',
-            '{t}.name' => ':{t}_name',
-            '{t}.email' => ':{t}_email',
-            '{t}.address' => ':{t}_address',
-            '{t}.amount' => ':{t}_amount',
-            '{t}.description' => ':{t}_description',
+            '{t}.date' => (object) [
+                'expression' => ':{t}_date',
+                'type' => 'date',
+            ],
+            '{t}.name' => (object) [
+                'expression' => ':{t}_name',
+                'type' => 'varchar(255)',
+            ],
+            '{t}.email' => (object) [
+                'expression' => ':{t}_email',
+                'type' => 'varchar(255)',
+            ],
+            '{t}.address' => (object) [
+                'expression' => ':{t}_address',
+                'type' => 'varchar(255)',
+            ],
+            '{t}.amount' => (object) [
+                'expression' => ':{t}_amount',
+                'type' => 'decimal(18, 2)',
+            ],
+            '{t}.description' => (object) [
+                'expression' => ':{t}_description',
+                'type' => 'varchar(255)',
+            ],
         ];
         $this->children = [
             (object) [

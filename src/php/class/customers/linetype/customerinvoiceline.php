@@ -28,9 +28,18 @@ class customerinvoiceline extends \Linetype
             ],
         ];
         $this->unfuse_fields = [
-            '{t}.description' => ':{t}_description',
-            '{t}.moredescription' => ':{t}_moredescription',
-            '{t}.amount' => ':{t}_amount',
+            '{t}.description' => (object) [
+                'expression' => ':{t}_description',
+                'type' => 'varchar(255)',
+            ],
+            '{t}.moredescription' => (object) [
+                'expression' => ':{t}_moredescription',
+                'type' => 'varchar(255)',
+            ],
+            '{t}.amount' => (object) [
+                'expression' => ':{t}_amount',
+                'type' => 'decimal(18, 2)',
+            ],
         ];
     }
 
