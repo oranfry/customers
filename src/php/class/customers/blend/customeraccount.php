@@ -1,13 +1,12 @@
 <?php
 namespace customers\blend;
 
-class customeraccounts extends \Blend
+class customeraccount extends \Blend
 {
     public function __construct()
     {
         $this->label = 'Accounts';
-        $this->linetypes = ['ncustomerinvoice', 'transaction'];
-        $this->hide_types = ['ncustomerinvoice' => 'customerinvoice'];
+        $this->linetypes = ['customerinvoice', 'transaction'];
         $this->showass = ['list', 'graph'];
         $this->groupby = 'date';
         $this->past = true;
@@ -23,16 +22,6 @@ class customeraccounts extends \Blend
                 'type' => 'date',
                 'groupable' => true,
                 'main' => true,
-            ],
-            (object) [
-                'name' => 'user',
-                'type' => 'text',
-                'main' => true,
-                'filteroptions' => function ($token) {
-                    $customer_users = get_values($token, 'user', 'user', null, 'name');
-                    ksort($customer_users);
-                    return $customer_users;
-                },
             ],
             (object) [
                 'name' => 'description',
