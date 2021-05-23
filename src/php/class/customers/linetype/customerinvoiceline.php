@@ -10,6 +10,11 @@ class customerinvoiceline extends \Linetype
         $this->table = 'customerinvoiceline';
         $this->fields = [
             (object) [
+                'name' => 'num',
+                'type' => 'number',
+                'fuse' => '{t}.num',
+            ],
+            (object) [
                 'name' => 'description',
                 'type' => 'text',
                 'fuse' => '{t}.description',
@@ -28,6 +33,10 @@ class customerinvoiceline extends \Linetype
             ],
         ];
         $this->unfuse_fields = [
+            '{t}.num' => (object) [
+                'expression' => ':{t}_num',
+                'type' => 'integer',
+            ],
             '{t}.description' => (object) [
                 'expression' => ':{t}_description',
                 'type' => 'varchar(255)',
