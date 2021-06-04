@@ -6,7 +6,7 @@ class customeraccount extends \Blend
     public function __construct()
     {
         $this->label = 'Accounts';
-        $this->linetypes = ['customerinvoice', 'transaction'];
+        $this->linetypes = ['ncustomerinvoice', 'transaction'];
         $this->showass = ['list', 'graph'];
         $this->groupby = 'date';
         $this->past = true;
