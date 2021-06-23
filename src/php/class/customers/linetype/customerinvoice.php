@@ -59,7 +59,7 @@ class customerinvoice extends \Linetype
             (object) [
                 'name' => 'broken',
                 'type' => 'text',
-                'fuse' => "if({t}.user is null or {t}.user = '', 'broken', '')",
+                'fuse' => "if({t}.user is null or {t}.user = '', 'no user', '')",
                 'derived' => true,
                 'calc' => function($line) {
                     if (@$line->broken) {
@@ -70,7 +70,7 @@ class customerinvoice extends \Linetype
                     $afterdate = ($fy - 8) . '-04-01';
 
                     if (strcmp($line->date, $afterdate) >= 0 && !@$line->file_path) {
-                        return 'broken';
+                        return 'missing file';
                     }
                 },
             ],
