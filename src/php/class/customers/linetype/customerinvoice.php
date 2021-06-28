@@ -9,97 +9,66 @@ class customerinvoice extends \Linetype
         $this->icon = 'docpdf';
         $this->table = 'customerinvoice';
         $this->fields = [
-            (object) [
-                'name' => 'icon',
-                'type' => 'icon',
-                'fuse' => "'docpdf'",
-                'derived' => true,
-            ],
-            (object) [
-                'name' => 'date',
-                'type' => 'date',
-                'groupable' => true,
-                'fuse' => '{t}.date',
-            ],
-            (object) [
-                'name' => 'email',
-                'type' => 'text',
-                'fuse' => '{t}.email',
-            ],
-            (object) [
-                'name' => 'name',
-                'type' => 'text',
-                'fuse' => '{t}.name',
-            ],
-            (object) [
-                'name' => 'address',
-                'type' => 'multiline',
-                'fuse' => '{t}.address',
-            ],
-            (object) [
-                'name' => 'description',
-                'type' => 'text',
-                'fuse' => '{t}.description',
-            ],
-            (object) [
-                'name' => 'amount',
-                'type' => 'number',
-                'dp' => 2,
-                'summary' => 'sum',
-                'fuse' => '{t}.amount',
-            ],
-            (object) [
-                'name' => 'file',
-                'type' => 'file',
-                'icon' => 'docpdf',
-                'path' => 'customerinvoice',
-                'supress_header' => true,
-                'generable' => true,
-            ],
-            (object) [
-                'name' => 'broken',
-                'type' => 'text',
-                'fuse' => "if({t}.user is null or {t}.user = '', 'no user', '')",
-                'derived' => true,
-                'calc' => function($line) {
-                    if (@$line->broken) {
-                        return $line->broken;
-                    }
+            'icon' => function($records) : string {
+                return 'docpdf';
+            },
+            'date' => function($records) {
+                return $records['/']->date;
+            },
+            'email' => function($records) {
+                return @$records['/']->email;
+            },
+            'name' => function($records) {
+                return $records['/']->name;
+            },
+            'address' => function($records) {
+                return $records['/']->address;
+            },
+            'description' => function($records) {
+                return $records['/']->description;
+            },
+            'amount' => function($records) : float {
+                return $records['/']->amount;
+            },
+            // 'file' => function($records) {
+            //     'type' => 'file',
+            //     'icon' => 'docpdf',
+            //     'path' => 'customerinvoice',
+            //     'supress_header' => true,
+            //     'generable' => true,
+            // },
+            'broken' => function($records) {
+                if (!@$records['/']->user) {
+                    return 'no user';
+                }
 
-                    $fy = date('Y') + (date('m') > 3 ? 1 : 0);
-                    $afterdate = ($fy - 8) . '-04-01';
+                // $fy = date('Y') + (date('m') > 3 ? 1 : 0);
+                // $afterdate = ($fy - 8) . '-04-01';
 
-                    if (strcmp($line->date, $afterdate) >= 0 && !@$line->file_path) {
-                        return 'missing file';
-                    }
-                },
-            ],
+                // if (strcmp($line->date, $afterdate) >= 0 && !@$records['/']->file_path) {
+                //     return 'missing file';
+                // }
+            },
         ];
         $this->unfuse_fields = [
-            '{t}.date' => (object) [
-                'expression' => ':{t}_date',
-                'type' => 'date',
-            ],
-            '{t}.name' => (object) [
-                'expression' => ':{t}_name',
-                'type' => 'varchar(255)',
-            ],
-            '{t}.email' => (object) [
-                'expression' => ':{t}_email',
-                'type' => 'varchar(255)',
-            ],
-            '{t}.address' => (object) [
-                'expression' => ':{t}_address',
-                'type' => 'varchar(255)',
-            ],
-            '{t}.amount' => (object) [
-                'expression' => ':{t}_amount',
-                'type' => 'decimal(18, 2)',
-            ],
-            '{t}.description' => (object) [
-                'expression' => ':{t}_description',
-                'type' => 'varchar(255)',
-            ],
+            'date' => function($line, $oldline) {
+                return $line->date;
+            },
+            'name' => function($line, $oldline) {
+                return $line->name;
+            },
+            'email' => function($line, $oldline) {
+                return @$line->email;
+            },
+            'address' => function($line, $oldline) {
+                return $line->address;
+            },
+            'amount' => function($line, $oldline) {
+                return @$line->amount;
+            },
+            'description' => function($line, $oldline) {
+                return @$line->description;
+            },
         ];
         $this->children = [
             (object) [
