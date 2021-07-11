@@ -30,7 +30,7 @@ class customerinvoiceline extends \Linetype
                 return $line->description;
             },
             'moredescription' => function($line, $oldline) {
-                return $line->moredescription;
+                return @$line->moredescription;
             },
             'amount' => function($line, $oldline) {
                 return $line->amount;
