@@ -1,7 +1,7 @@
 <?php
 namespace customers\linetype;
 
-class customerinvoice extends \Linetype
+class customerinvoice extends \jars\Linetype
 {
     public function __construct()
     {
@@ -99,7 +99,7 @@ class customerinvoice extends \Linetype
         return $errors;
     }
 
-    public function complete($line)
+    public function complete($line) : void
     {
         if (!@$line->amount) {
             $line->amount = $this->calculate_total($line);

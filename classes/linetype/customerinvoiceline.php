@@ -1,7 +1,7 @@
 <?php
 namespace customers\linetype;
 
-class customerinvoiceline extends \Linetype
+class customerinvoiceline extends \jars\Linetype
 {
     public function __construct()
     {
