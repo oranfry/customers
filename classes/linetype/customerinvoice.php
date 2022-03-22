@@ -72,10 +72,9 @@ class customerinvoice extends \jars\Linetype
         ];
         $this->children = [
             (object) [
-                'label' => 'lines',
                 'linetype' => 'customerinvoiceline',
-                'rel' => 'many',
-                'parent_link' => 'customerinvoicecustomerinvoiceline',
+                'property' => 'lines',
+                'tablelink' => 'customerinvoice_line',
            ],
         ];
     }
