@@ -5,31 +5,16 @@ class customerinvoice extends \jars\Linetype
 {
     public function __construct()
     {
-        $this->label = 'Customer Invoice';
-        $this->icon = 'docpdf';
         $this->table = 'customerinvoice';
+
         $this->fields = [
-            'icon' => function($records) : string {
-                return 'docpdf';
-            },
-            'date' => function($records) {
-                return $records['/']->date;
-            },
-            'email' => function($records) {
-                return @$records['/']->email;
-            },
-            'name' => function($records) {
-                return $records['/']->name;
-            },
-            'address' => function($records) {
-                return $records['/']->address;
-            },
-            'description' => function($records) {
-                return $records['/']->description;
-            },
-            'amount' => function($records) : float {
-                return $records['/']->amount;
-            },
+            'icon' => fn($records) : string => 'docpdf',
+            'date' => fn($records) => $records['/']->date,
+            'email' => fn($records) => @$records['/']->email,
+            'name' => fn($records) => $records['/']->name,
+            'address' => fn($records) => $records['/']->address,
+            'description' => fn($records) => $records['/']->description,
+            'amount' => fn($records) : float => $records['/']->amount,
             // 'file' => function($records) {
             //     'type' => 'file',
             //     'icon' => 'docpdf',
@@ -50,26 +35,16 @@ class customerinvoice extends \jars\Linetype
                 // }
             },
         ];
+
         $this->unfuse_fields = [
-            'date' => function($line, $oldline) {
-                return $line->date;
-            },
-            'name' => function($line, $oldline) {
-                return $line->name;
-            },
-            'email' => function($line, $oldline) {
-                return @$line->email;
-            },
-            'address' => function($line, $oldline) {
-                return $line->address;
-            },
-            'amount' => function($line, $oldline) {
-                return @$line->amount;
-            },
-            'description' => function($line, $oldline) {
-                return @$line->description;
-            },
+            'date' => fn($line, $oldline) => $line->date,
+            'name' => fn($line, $oldline) => $line->name,
+            'email' => fn($line, $oldline) => @$line->email,
+            'address' => fn($line, $oldline) => $line->address,
+            'amount' => fn($line, $oldline) => @$line->amount,
+            'description' => fn($line, $oldline) => @$line->description,
         ];
+
         $this->children = [
             (object) [
                 'linetype' => 'customerinvoiceline',

@@ -5,9 +5,8 @@ class customerinvoiceline extends \jars\Linetype
 {
     public function __construct()
     {
-        $this->label = 'Customer Invoice Line';
-        $this->icon = 'docpdf';
         $this->table = 'customerinvoiceline';
+
         $this->fields = [
             'num' => function($records) {
                 return @$records['/']->num;
@@ -22,6 +21,7 @@ class customerinvoiceline extends \jars\Linetype
                 return $records['/']->amount;
             },
         ];
+
         $this->unfuse_fields = [
             'num' => function($line, $oldline) {
                 return @$line->num;

@@ -5,8 +5,6 @@ class customercredit extends \jars\Linetype
 {
     public function __construct()
     {
-        $this->label = 'Customer Account Credit';
-        $this->icon = 'dollar-box';
         $this->table = 'customercredit';
         $this->fields = [
             (object) [

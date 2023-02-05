@@ -7,11 +7,7 @@ class ncustomerinvoice extends customerinvoice
     {
         parent::__construct();
 
-        list($amount) = filter_objects($this->fields, 'name', 'is', 'amount');
-        $amount->fuse = '-{t}.amount';
-        $this->unfuse_fields['{t}.amount']->expression = '-:{t}_amount';
-
-        list($file) = filter_objects($this->fields, 'name', 'is', 'file');
-        $file->generable = false;
+        $this->fields['amount'] = fn($records) : float => 0 - $records['/']->amount;
+        $this->unfuse_fields['amount'] = fn ($line, $oldline) => @$line->amount ? 0 - $line->amount : null;
     }
 }
