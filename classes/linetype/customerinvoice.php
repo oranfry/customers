@@ -8,31 +8,16 @@ class customerinvoice extends \jars\Linetype
         $this->table = 'customerinvoice';
 
         $this->fields = [
-            'icon' => fn($records) : string => 'docpdf',
             'date' => fn($records) => $records['/']->date,
             'email' => fn($records) => @$records['/']->email,
             'name' => fn($records) => $records['/']->name,
             'address' => fn($records) => $records['/']->address,
             'description' => fn($records) => $records['/']->description,
             'amount' => fn($records) : float => $records['/']->amount,
-            // 'file' => function($records) {
-            //     'type' => 'file',
-            //     'icon' => 'docpdf',
-            //     'path' => 'customerinvoice',
-            //     'supress_header' => true,
-            //     'generable' => true,
-            // },
             'broken' => function($records) {
                 if (!@$records['/']->user) {
                     return 'no user';
                 }
-
-                // $fy = date('Y') + (date('m') > 3 ? 1 : 0);
-                // $afterdate = ($fy - 8) . '-04-01';
-
-                // if (strcmp($line->date, $afterdate) >= 0 && !@$records['/']->file_path) {
-                //     return 'missing file';
-                // }
             },
         ];
 
@@ -50,6 +35,7 @@ class customerinvoice extends \jars\Linetype
                 'linetype' => 'customerinvoiceline',
                 'property' => 'lines',
                 'tablelink' => 'customerinvoice_line',
+                'only_parent' => 'customerinvoice_id',
            ],
         ];
     }
