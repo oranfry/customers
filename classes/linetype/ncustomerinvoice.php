@@ -7,7 +7,10 @@ class ncustomerinvoice extends customerinvoice
     {
         parent::__construct();
 
-        $this->fields['amount'] = fn($records) : float => 0 - $records['/']->amount;
-        $this->unfuse_fields['amount'] = fn ($line, $oldline) => @$line->amount ? 0 - $line->amount : null;
+        $old_fuse = $this->fields['amount'];
+        $old_unfuse = $this->unfuse_fields['amount'];
+
+        $this->fields['amount'] = fn ($records) : string => bcsub('0', $old_fuse($records), 2);
+        $this->unfuse_fields['amount'] = fn ($line, $oldline) : string => bcsub('0', $old_unfuse($line, $oldline), 2);
     }
 }

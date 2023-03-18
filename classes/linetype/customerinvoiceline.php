@@ -7,35 +7,11 @@ class customerinvoiceline extends \jars\Linetype
     {
         $this->table = 'customerinvoiceline';
 
-        $this->fields = [
-            'num' => function($records) {
-                return @$records['/']->num;
-            },
-            'description' => function($records) {
-                return $records['/']->description;
-            },
-            'moredescription' => function($records) {
-                return @$records['/']->moredescription;
-            },
-            'amount' => function($records) {
-                return $records['/']->amount;
-            },
-        ];
+        $this->simple_ints('num');
+        $this->simple_strings('description', 'moredescription');
 
-        $this->unfuse_fields = [
-            'num' => function($line, $oldline) {
-                return @$line->num;
-            },
-            'description' => function($line, $oldline) {
-                return $line->description;
-            },
-            'moredescription' => function($line, $oldline) {
-                return @$line->moredescription;
-            },
-            'amount' => function($line, $oldline) {
-                return $line->amount;
-            },
-        ];
+        $this->fields['amount'] = fn ($records) : string => bcadd('0', $records['/']->amount ?? '0', 2);
+        $this->unfuse_fields['amount'] = fn ($line) : string => $line->amount ?? '0.00';
     }
 
     public function validate($line)
