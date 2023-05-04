@@ -1,13 +1,22 @@
 <?php
+
 namespace customers\linetype;
+
+use simplefields\traits\SimpleFields;
 
 class customerinvoice extends \jars\Linetype
 {
+    use SimpleFields;
+
     public function __construct()
     {
         $this->table = 'customerinvoice';
 
-        $this->simple_strings('date', 'email', 'name', 'address', 'description');
+        $this->simple_date('date');
+        $this->simple_string('email');
+        $this->simple_string('name');
+        $this->simple_string('address');
+        $this->simple_string('description');
 
         $this->fields['amount'] = fn ($records) : string => bcadd('0', $records['/']->amount ?? '0', 2);
         $this->unfuse_fields['amount'] = fn ($line) : string => $line->amount ?? '0.00';
@@ -28,9 +37,9 @@ class customerinvoice extends \jars\Linetype
         ];
     }
 
-    public function validate($line)
+    public function validate($line): array
     {
-        $errors = [];
+        $errors = parent::validate($line);
 
         if (@$line->date == null) {
             $errors[] = 'no date';

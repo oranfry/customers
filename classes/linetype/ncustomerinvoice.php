@@ -1,4 +1,5 @@
 <?php
+
 namespace customers\linetype;
 
 class ncustomerinvoice extends customerinvoice
