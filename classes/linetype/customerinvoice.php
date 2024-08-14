@@ -57,7 +57,12 @@ class customerinvoice extends \jars\Linetype
         return $errors;
     }
 
-    public function complete($line) : void
+    public function complete($line): void
     {
+        if (!@$line->external_id) {
+            $line->external_id = substr($line->id, 0, 7);
+        }
+
+        parent::complete($line);
     }
 }
