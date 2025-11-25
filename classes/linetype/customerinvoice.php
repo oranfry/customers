@@ -19,9 +19,6 @@ class customerinvoice extends \jars\Linetype
         $this->simple_string('description');
         $this->simple_string('external_id');
 
-        $this->fields['amount'] = fn ($records) : string => bcadd('0', $records['/']->amount ?? '0', 2);
-        $this->unfuse_fields['amount'] = fn ($line) : string => $line->amount ?? '0.00';
-
         $this->fields['broken'] = function($records) {
             if (!@$records['/']->user) {
                 return 'no user';

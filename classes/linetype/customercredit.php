@@ -14,9 +14,7 @@ class customercredit extends \jars\Linetype
 
         $this->simple_date('date');
         $this->simple_string('description');
-
-        $this->fields['amount'] = fn ($records) : string => bcadd('0', $records['/']->amount ?? '0', 2);
-        $this->unfuse_fields['amount'] = fn ($line) : string => $line->amount ?? '0.00';
+        $this->simple_float('amount', 2);
     }
 
     public function validate($line): array

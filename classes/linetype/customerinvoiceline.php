@@ -15,9 +15,7 @@ class customerinvoiceline extends \jars\Linetype
         $this->simple_int('num');
         $this->simple_string('description');
         $this->simple_string('moredescription');
-
-        $this->fields['amount'] = fn ($records) : string => bcadd('0', $records['/']->amount ?? '0', 2);
-        $this->unfuse_fields['amount'] = fn ($line) : string => $line->amount ?? '0.00';
+        $this->simple_float('amount', 2);
 
         $this->borrow['date'] = fn ($line): ?string => @$line->invoice->date;
         $this->borrow['user'] = fn ($line): ?string => @$line->invoice->user;
