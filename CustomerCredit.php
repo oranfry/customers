@@ -4,7 +4,7 @@ namespace OranFry\Customers\Linetypes;
 
 use OranFry\SimpleFields\Traits\SimpleFields;
 
-class CustomerCredit extends OranFry\JarsCore\Linetype
+class CustomerCredit extends \OranFry\JarsCore\Linetype
 {
     use SimpleFields;
 
