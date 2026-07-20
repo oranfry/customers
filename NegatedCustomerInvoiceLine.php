@@ -1,10 +1,10 @@
 <?php
 
-namespace customers\linetype;
+namespace OranFry\Customers\Linetypes;
 
-use simplefields\traits\SimpleFields;
+use OranFry\SimpleFields\Traits\SimpleFields;
 
-class ncustomerinvoiceline extends customerinvoiceline
+class NegatedCustomerInvoiceLine extends CustomerInvoiceLine
 {
     use SimpleFields;
 

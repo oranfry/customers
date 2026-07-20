@@ -1,10 +1,10 @@
 <?php
 
-namespace customers\linetype;
+namespace OranFry\Customers\Linetypes;
 
-use simplefields\traits\SimpleFields;
+use OranFry\SimpleFields\Traits\SimpleFields;
 
-class customercredit extends \jars\Linetype
+class CustomerCredit extends OranFry\JarsCore\Linetype
 {
     use SimpleFields;
 

@@ -1,8 +1,8 @@
 <?php
 
-namespace customers\linetype;
+namespace OranFry\Customers\Linetypes;
 
-class ncustomerinvoice extends customerinvoice
+class NegatedCustomerInvoice extends CustomerInvoice
 {
     public function __construct()
     {
